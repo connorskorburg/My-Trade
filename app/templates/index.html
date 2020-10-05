@@ -24,7 +24,7 @@
     <nav class="nav-right">
       
       <a class="nav-link" href="#about">About</a>
-      <a class="nav-link" href="#Contact">Contact</a>
+      <a class="nav-link" href="#contact">Contact</a>
       <a class="login btn btn-primary" href="#">Login</a>
       <a class="register btn btn-primary-outline" href="#">Register</a>
       
@@ -68,6 +68,14 @@
     
     <section id="about-inner">
 
+      <article class="about-mobile">
+
+        <p>Buy, sell and trade stock as prices are moving up and down. Track your progress, prices, and save your data. All Trades are simulated and completely free to use!</p>
+        
+        <a href="#" class="btn btn-primary">Start Trading</a>
+
+      </article>
+
       <article class="about-left">
   
         <img src="../static/images/computer.svg" alt="Computer Image">
@@ -79,16 +87,61 @@
         
         <h2>Make trades in real time</h2>
         
-        <p>Buy, sell and trade stock as prices are moving up and down. Track your progress, prices, and save your data. All Trades are simulated and completely free to use!</p>
+        <p id="about-p">Buy, sell and trade stock as prices are moving up and down. Track your progress, prices, and save your data. All Trades are simulated and completely free to use!</p>
         
-        <a href="#" class="btn btn-xl btn-primary">Start Trading</a>
+        <a href="#" class="btn btn-xl btn-m btn-primary">Start Trading</a>
         
       </article>
+
       
     </section>
       
   
   </main>
+
+
+  <main id="contact">
+
+    <section id="contact-inner">
+
+      <article class="contact-left">
+        <form action="/contact">
+        {% csrf_token %}
+          
+          <h3>Contact</h3>
+
+          <label for="name">Full Name</label>
+          <input type="text" name="name">
+        
+          <label for="email">Email</label>
+          <input type="email" name="email">
+
+          <label for="message">Message</label>
+          <textarea name="message"></textarea>
+
+          <button class="btn btn-block btn-xl btn-primary">Send</button>
+        
+
+      </form>
+
+
+      </article>
+      
+
+      <article class="contact-right">
+
+        <img src="../static//images/contact.svg" alt="Contact Image">
+
+      </article>
+
+    </section>
+
+    
+  </main>
+      <section id="contact-bottom">
+  
+  
+      </section>
 
 
 </body>

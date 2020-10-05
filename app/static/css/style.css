@@ -29,6 +29,9 @@ html, body{
   font-weight: 600;
   text-decoration: none;
 }
+.btn-block {
+  width: 100%;
+}
 .btn-primary {
   border: 2px solid var(--primary);
   background-color: var(--primary);
@@ -38,6 +41,7 @@ html, body{
   border: 2px solid var(--primary);
   color: var(--primary);
   background-color: transparent;
+  cursor: pointer;
   transition: var(--transition-350);
 }
 .btn-secondary {
@@ -49,6 +53,7 @@ html, body{
   border: 2px solid var(--secondary);
   color: var(--secondary);
   background-color: transparent;
+  cursor: pointer;
   transition: var(--transition-350);
 }
 
@@ -61,6 +66,7 @@ html, body{
   border: 2px solid var(--primary);
   background-color: var(--primary);
   color: var(--white);
+  cursor: pointer;
   transition: var(--transition-350);
 }
 
@@ -69,9 +75,6 @@ html, body{
 #home {
   z-index: 12345;
   width: 100%;
-  /* position: relative;
-  top: 84px; */
-  /* height: 100vh; */
 }
   /* top navigation */
   .top-nav {
@@ -116,13 +119,7 @@ html, body{
   width: 100%;
   display: flex;
   padding: 0 5%;
-  /* align-items: center; */
-  /* height: calc(80vh - 84px); */
 }
-  .hero-left, .hero-right {
-    /* position: relative;
-    bottom: 84px; */
-  }
   /* hero content left */
   .hero-left {
     width: 50%;
@@ -156,12 +153,7 @@ html, body{
 /* about content */
 #about {
   position: relative;
-  /* height: 100vh; */
-  /* height: 1080px; */
-  /* width: 100%;
-  display: flex; */
   background-color: var(--third);
-  /* align-items: center; */
 }
   #about-inner{
     height: fit-content;
@@ -171,7 +163,6 @@ html, body{
   .about-left {
     width: 40%;
     margin-right: 10%;
-    /* position: relative; */
   }
     .about-left img {
       width: 80%;
@@ -200,16 +191,82 @@ html, body{
     }
   
 
+/* contact content  */
+#contact {
+  width: 100%;
+  padding: 15% 5%;
+}
+  #contact-inner {
+    width: 100%;
+    display: flex;
+  }
+  .contact-left {
+    width: 40%;
+    margin-right: 10%;
+  }
+    .contact-left form {
+      width: 100%;
+      border-radius: 0.15rem;
+      padding: 1rem;
+      background-color: var(--secondary);
+      box-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+    }
+      .contact-left form h3 {
+        font-size: 2rem;
+        text-align: center;
+        color: var(--bgColor);
+        /* margin: 1rem 0; */
+      }
+      .contact-left form label {
+        /* color: ; */
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        display: block;
+        margin-top: 1rem;
+      }
+      .contact-left form input {
+        width: 100%;
+        padding: 0.5rem;
+        border: none;
+        outline: none;
+        border-radius: 0.15rem;
+      }
+      .contact-left form textarea {
+        resize: none;
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 0.15rem;
+        border: none;
+        outline: none;
+        margin-bottom: 1.5rem;
+        /* height: 18rem; */
+      }
+  .contact-right {
+    width: 40%;
+    margin-left: 10%;
+  }
+    .contact-right img {
+      width: 100%;
+      height: 100%;
+    }
+
+  #contact-bottom {
+    width: 100%;
+    background-color: var(--secondary);
+    padding: 5% 0;
+  }
+
 
 @media screen and (min-width: 300px) and (max-width: 700px){
-  #hero-content {
-    padding-top: 2rem;
-    height: fit-content;
+  #hero-content, #about-inner {
+    padding-top: 15%;
+    padding-bottom: 15%;
     flex-direction: column;
   }
-  .nav-right, #hero-content .btn-m, #info-m{
+  .nav-right, #hero-content .btn-m, #info-m, #about-p, #about-inner .btn-m{
     display: none !important;
   }
+  /* hero content */
   #hero-content .hero-mobile{
     display: block;
     width: 100%;
@@ -217,41 +274,68 @@ html, body{
     .hero-mobile p {
       color: var(--secondary);
       text-align: center;
-      margin: 1rem 0;
+      margin: 2rem 0;
+      font-size: 1.15rem;
     }
-  .hero-left{
-    width: 100%;
-    margin: 0 auto;
+    #hero-content .hero-left h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      width: 100%;
+    }
+    #hero-content .hero-left p {
+      text-align: center;
+      width: 100%;
+      font-size: 1rem;
+    }
+    .hero-left, .about-right{
+      padding: 0;
+      width: 100%;
+      margin: 1rem auto;
+    }
+    .hero-right, #about-inner .about-left{
+      padding: 0;
+      margin-right: 0rem;
+      margin: 0 auto;
+      width: 65%;
+    }
+  /* about mobile */
+  #about-inner {
+    padding: 15% 5%;
+    flex-direction: column-reverse;
   }
-  .hero-right{
-    padding: 0;
-    width: 65%;
-  }
-  #hero-content .hero-left h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    width: 100%;
-  }
-  #hero-content .hero-left p {
-    text-align: center;
-    width: 100%;
-    font-size: 1rem;
-  }
-  #hero-content .btn-primary, #hero-content .btn-secondary {
+    #about-inner .about-left img{
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+    }
+      .about-right h2 {
+        font-size: 2rem;
+        text-align: center;
+      }
+      .about-mobile p {
+        font-size: 1.15rem;
+        text-align: center;
+        color: var(--secondary);
+        margin: 2rem 0;
+        line-height: 1.75rem;
+      }
+  /* utitliy mobile */
+  #hero-content .btn-primary, #hero-content .btn-secondary, .about-mobile .btn-primary {
     display: block;
     margin: 1rem 0;
     text-align: center;
   }
 }
 @media screen and (min-width:701px){
-  .hero-mobile {
+  .hero-mobile, .about-mobile {
     display: none;
   }
 }
 @media screen and (min-width:701px) and (max-width: 1050px){
-  #hero-content {
+  #hero-content, #about-inner {
     height: fit-content;
-    padding-top: 7rem;
+    padding-top: 15%;
+    padding-bottom: 15%;
   }
   .hero-left h1 {
     font-size: 2.5rem;
@@ -260,6 +344,13 @@ html, body{
   .hero-left p {
     font-size: 1rem;
     width: 20rem;
+  }
+  .about-right h2 {
+    font-size: 2rem;
+  }
+  .about-right p {
+    font-size: 1rem;
+    line-height: 2rem;
   }
 }
 
@@ -281,6 +372,12 @@ html, body{
   .about-right {
     padding-right: 10%;
   }
+    .about-right h2 {
+      font-size: 2rem;
+    }
+    .about-right p {
+      font-size: 1.15rem;
+    }
   #hero-content, #about-inner {
     padding: 15% 0;
   }
@@ -324,6 +421,12 @@ html, body{
     border-bottom-right-radius: 25%;
     bottom: 35%;
   }
+  .about-right h2 {
+    font-size: 2.75rem;
+  }
+  .about-right p {
+    font-size: 1.5rem;
+  }
 }
 
 
@@ -337,6 +440,9 @@ html, body{
     width: 45rem;
     font-size: 1.75rem;
     line-height: 3rem;
+  }
+  .about-right h2 {
+    font-size: 3.25rem;
   }
 }
 
