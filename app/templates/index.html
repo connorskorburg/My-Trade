@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTrade</title>
+  {% load static %}
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <!-- nav and hero content container -->
+  <!-- top navigation -->
+  <nav class="top-nav">
+    <!-- nav logo -->
+    <nav class="nav-left">
+      
+      <img src="../static/images/logo.svg" alt="Logo">
+      <h1>MyTrade</h1>
+      
+    </nav>
+    
+    <!-- navigation links -->
+    <nav class="nav-right">
+      
+      <a class="nav-link" href="#about">About</a>
+      <a class="nav-link" href="#Contact">Contact</a>
+      <a class="login btn btn-primary" href="#">Login</a>
+      <a class="register btn btn-primary-outline" href="#">Register</a>
+      
+    </nav>
+    
+  </nav>
+  
+  <main id="home">
+  <!-- hero content -->
+  <section id="hero-content">
+
+      <article class="hero-left">
+
+        <h1>Trading made simple</h1>
+        <p id="info-m">Simulate trades in real time without spending a dime</p>
+        <a href="#" class="btn btn-m btn-xl btn-primary">Start Trading</a>
+        <a href="#" class="btn btn-m btn-xl btn-secondary">Login</a>
+
+      </article>
+
+      <article class="hero-right">
+
+        <img src="../static/images/hero.svg" alt="Hero Image">
+
+      </article>
+
+      <article class="hero-mobile">
+
+        <p>Simulate trades in real time without spending a dime</p>
+        <a href="#" class="btn btn-primary">Start Trading</a>
+        <a href="#" class="btn btn-secondary">Login</a>
+
+      </article>
+
+
+    </section>
+
+  </main>
+
+  <main id="about">
+    
+    <section id="about-inner">
+
+      <article class="about-left">
+  
+        <img src="../static/images/computer.svg" alt="Computer Image">
+        <div class="bg-img"></div>
+  
+      </article>
+      
+      <article class="about-right">
+        
+        <h2>Make trades in real time</h2>
+        
+        <p>Buy, sell and trade stock as prices are moving up and down. Track your progress, prices, and save your data. All Trades are simulated and completely free to use!</p>
+        
+        <a href="#" class="btn btn-xl btn-primary">Start Trading</a>
+        
+      </article>
+      
+    </section>
+      
+  
+  </main>
+
+
+</body>
+</html>
