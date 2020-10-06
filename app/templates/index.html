@@ -36,12 +36,68 @@
 
   <nav id="nav-mobile">
 
-    <a class="btn btn-secondary btn-block" href="#about">About</a>
-    <a class="btn btn-secondary btn-block" href="#contact">Contact</a>
-    <a class="login btn btn-block btn-secondary" href="#">Login</a>
-    <a class="register btn btn-block btn-secondary-outline" href="#">Register</a>
+    <a class="btn btn-secondary btn-block mobile-link" href="#about">About</a>
+    <a class="btn btn-secondary btn-block mobile-link" href="#contact">Contact</a>
+    <a class="login btn btn-block btn-secondary login" href="#">Login</a>
+    <a class="register btn btn-block btn-secondary-outline register" href="#">Register</a>
 
   </nav>
+
+  <!-- log & reg popup -->
+
+  <!-- login form popup -->
+  <main class="login-outer">
+
+    <form action="/login" class="login-form" method="POST">
+
+      <img id="close-login" src="../static/images/close-white.svg" alt="Close Icon">
+      {% csrf_token %}
+
+      <label for="username">Username</label>
+      <input type="text" name="username">
+      
+      <label for="password">Password</label>
+      <input type="password" name="password">
+      
+      <button class="btn btn-block btn-secondary" type="submit">Login</button>
+      
+      
+    </form>
+  </main>
+
+  <!-- register form popup -->
+
+  <main class="register-outer">
+
+    <form action="/register" class="register-form" method="POST">
+
+      <img id="close-register" src="../static/images/close-white.svg" alt="Close Icon">
+      
+      {% csrf_token %}
+
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name">
+
+      <label for="first_name">Last Name</label>
+      <input type="text" name="last_name">
+
+      <label for="username">Username</label>
+      <input type="text" name="username">
+      
+      <label for="password">Password</label>
+      <input type="password" name="password">
+      
+      <label for="conf_password">Confirm Password</label>
+      <input type="password" name="conf_password">
+      
+      <button class="btn btn-block btn-secondary" type="submit">Register</button>
+      
+      
+    </form>
+    
+  </main>
+
+
   
   <main id="home">
   <!-- hero content -->
@@ -51,8 +107,8 @@
 
         <h1>Trading made simple</h1>
         <p id="info-m">Simulate trades in real time without spending a dime</p>
-        <a href="#" class="btn btn-m btn-xl btn-primary">Start Trading</a>
-        <a href="#" class="btn btn-m btn-xl btn-secondary">Login</a>
+        <a href="#" class="btn btn-m btn-xl register btn-primary">Start Trading</a>
+        <a href="#" class="btn btn-m btn-xl login btn-secondary">Login</a>
 
       </article>
 
@@ -65,8 +121,8 @@
       <article class="hero-mobile">
 
         <p>Simulate trades in real time without spending a dime</p>
-        <a href="#" class="btn btn-primary">Start Trading</a>
-        <a href="#" class="btn btn-secondary">Login</a>
+        <a href="#" class="btn btn-primary register">Start Trading</a>
+        <a href="#" class="btn btn-secondary login">Login</a>
 
       </article>
 
@@ -83,7 +139,7 @@
 
         <p>Buy, sell and trade stock as prices are moving up and down. Track your progress, prices, and save your data. All Trades are simulated and completely free to use!</p>
         
-        <a href="#" class="btn btn-primary">Start Trading</a>
+        <a href="#" class="btn btn-primary register">Start Trading</a>
 
       </article>
 
@@ -100,7 +156,7 @@
         
         <p id="about-p">Buy, sell and trade stock as prices are moving up and down. Track your progress, prices, and save your data. All Trades are simulated and completely free to use!</p>
         
-        <a href="#" class="btn btn-xl btn-m btn-primary">Start Trading</a>
+        <a href="#" class="btn btn-xl btn-m btn-primary register">Start Trading</a>
         
       </article>
 
