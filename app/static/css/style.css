@@ -26,11 +26,13 @@ html, body{
 .btn {
   border-radius: 0.15rem;
   padding: 0.15rem 1.15rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
 }
 .btn-block {
   width: 100%;
+  display: block;
+  text-align: center;
 }
 .btn-primary {
   border: 2px solid var(--primary);
@@ -65,6 +67,19 @@ html, body{
 .btn-primary-outline:hover {
   border: 2px solid var(--primary);
   background-color: var(--primary);
+  color: var(--white);
+  cursor: pointer;
+  transition: var(--transition-350);
+}
+
+.btn-secondary-outline {
+  border: 2px solid var(--secondary);
+  background-color: transparent;
+  color: var(--secondary);
+}
+.btn-secondary-outline:hover {
+  border: 2px solid var(--secondary);
+  background-color: var(--secondary);
   color: var(--white);
   cursor: pointer;
   transition: var(--transition-350);
@@ -215,10 +230,8 @@ html, body{
         font-size: 2rem;
         text-align: center;
         color: var(--bgColor);
-        /* margin: 1rem 0; */
       }
       .contact-left form label {
-        /* color: ; */
         font-weight: 700;
         margin-bottom: 0.5rem;
         display: block;
@@ -229,17 +242,25 @@ html, body{
         padding: 0.5rem;
         border: none;
         outline: none;
+        border: 2px solid var(--white);
         border-radius: 0.15rem;
       }
       .contact-left form textarea {
         resize: none;
+        border: 2px solid var(--white);
         width: 100%;
         padding: 0.5rem;
         border-radius: 0.15rem;
         border: none;
         outline: none;
         margin-bottom: 1.5rem;
-        /* height: 18rem; */
+      }
+      .contact-left form textarea:focus, .contact-left form input:focus {
+        border: 2px solid var(--primary);
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      }
+      .contact-left form button {
+        font-size: 1rem;
       }
   .contact-right {
     width: 40%;
@@ -254,12 +275,22 @@ html, body{
     width: 100%;
     background-color: var(--secondary);
     padding: 5% 0;
+    display: flex;
+    justify-content: space-around;
   }
+    #contact-bottom a {
+      display: inline-block;
+    }
+    #contact-bottom a:hover {
+      transform: scale(1.02);
+      cursor: pointer;
+      transition: var(--transition-350);
+    }
 
 
-@media screen and (min-width: 300px) and (max-width: 700px){
+@media screen and (min-width: 200px) and (max-width: 700px){
   #hero-content, #about-inner {
-    padding-top: 15%;
+    padding-top: calc(10% + 84px);
     padding-bottom: 15%;
     flex-direction: column;
   }
@@ -325,9 +356,47 @@ html, body{
     margin: 1rem 0;
     text-align: center;
   }
+  #hamburger {
+    margin-left: auto;
+  }
+  #hamburger:hover {
+    transform: rotate(180deg);
+    cursor: pointer;
+    transition: var(--transition-450);
+  }
+  #nav-mobile {
+    width: 90%;
+    margin: 100px 5% 0 5%;
+    background-color: var(--primary);
+    position: fixed;
+    z-index: 1342343;
+    padding: 1rem;
+    border-radius: 0.15rem;
+    display: none;
+  }
+    #nav-mobile a {
+      display: block;
+      text-decoration: none;
+      margin: 0.5rem 0;
+      padding: 0.5rem 0;
+    }
+  /* login and register */
+
+  
+  /* contact content */
+  .contact-right {
+    display: none;
+  }
+  .contact-left {
+    margin: 0;
+    width: 100%;
+  }
+    .contact-left textarea{
+      height: 10rem;
+    }
 }
 @media screen and (min-width:701px){
-  .hero-mobile, .about-mobile {
+  .hero-mobile, .about-mobile, #hamburger, #nav-mobile {
     display: none;
   }
 }
@@ -352,6 +421,17 @@ html, body{
     font-size: 1rem;
     line-height: 2rem;
   }
+  /* contact content  */
+  .contact-right {
+    display: none;
+  }
+  .contact-left {
+    margin: 0;
+    width: 100%;
+  }
+    .contact-left textarea{
+      height: 10rem;
+    }
 }
 
 @media screen and (min-width: 1051px){
@@ -392,6 +472,14 @@ html, body{
     position: relative;
     border-bottom-right-radius: 25%;
   }
+  /* contact content */
+  .contact-left label, .contact-left input, .contact-left textarea {
+    font-size: 1rem;
+  }
+  .contact-left textarea{
+    height: 10rem;
+  }
+  
 }
 @media screen and (max-width:1549px){
   .about-left .bg-img {
@@ -411,6 +499,10 @@ html, body{
   }
   .btn-xl {
     font-size: 1.25rem;
+  }
+  .contact-left button {
+    font-size: 1.25rem;
+    padding: 0.5rem 0;
   }
   .top-nav a {
     font-size: 1.25rem;
@@ -443,6 +535,12 @@ html, body{
   }
   .about-right h2 {
     font-size: 3.25rem;
+  }
+  .contact-left label, .contact-left input, .contact-left textarea {
+    font-size: 1.15rem;
+  }
+  .contact-left textarea{
+    height: 15rem;
   }
 }
 
