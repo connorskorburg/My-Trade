@@ -424,6 +424,12 @@ html, body{
         color: #000;
       }
 
+      .search input:focus {
+        border: 2px solid var(--secondary);
+        color: #000;
+      }
+
+
 
 
 
