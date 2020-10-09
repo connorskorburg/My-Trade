@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTrade</title>
+  {% load static %}
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <!-- nav and hero content container -->
+  <!-- top navigation -->
+  <nav class="top-nav">
+    <!-- nav logo -->
+    <nav class="nav-left">
+      
+      <img src="../static/images/logo.svg" alt="Logo">
+      <h1>MyTrade</h1>
+      
+    </nav>
+    
+    <!-- navigation links -->
+    <nav class="nav-right-dash">
+      
+      <a class="btn btn-primary" href="#">Logout</a>
+      
+    </nav>
+
+  </nav>
+
+  <main id="dashboard">
+
+
+    <article class="profile">
+
+      <h2>John Smith</h2>
+      <h3 class="username">@johnsmith</h3>
+      
+      <div class="account-balance">
+        <h3>Account Balance:</h3>
+        <p class="balance">$1300.00</p>
+      </div>
+
+    </article>
+
+    <article class="search">
+      
+      <form action="/search">
+      {% csrf_token %}
+        <h2>Make a trade</h2>
+
+        <label for="symbol">Symbol</label>
+        <input type="text" name="symbol">
+
+        <button class="btn btn-block btn-xl btn-secondary">Search</button>
+
+      </form>
+
+
+    </article>
+
+    <article class="latest-trade"></article>
+
+
+  </main>
+  
+</body>
+</html>

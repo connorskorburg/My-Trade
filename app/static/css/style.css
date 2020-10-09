@@ -342,6 +342,96 @@ html, body{
 
 
 
+
+
+/* dashboard */
+.nav-right-dash{
+  margin-left: auto;
+}
+
+#dashboard {
+  width: 100%;
+  padding: 100px 5%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-gap: 2rem;
+}
+
+  .profile {
+    text-align: center;
+    border-radius: 0.15rem;
+    background-color: var(--secondary);
+    padding: 1rem;
+  }
+
+    .profile h2 {
+      padding-bottom: 0.5rem;
+      color: var(--white);
+    }
+    .profile .username {
+      color: var(--bgColor);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--bgColor);
+      margin-bottom: 1rem;
+    }
+
+    .account-balance{
+      color: var(--primary);
+      background-color: var(--third);
+      padding: 1rem;
+      border-radius: 0.15rem;
+    }
+    .account-balance h3 {
+      margin-bottom: 1rem;
+    }
+    .account-balance p {
+      border-radius: 0.15rem;
+      background-color: #fff;
+      font-size: 1.15rem;
+      border: 2px solid var(--primary);
+      padding: 0.5rem 0;
+      margin-bottom: 1rem;
+    }
+
+
+    /* search form */
+    .search {
+      background-color: var(--third);
+      padding: 1rem 2rem;
+      border-radius: 0.15rem;
+    }
+      .search h2 {
+        text-align: center;
+        color: var(--primary);
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--primary);
+      }
+
+      .search label {
+        display: block;
+        color: var(--primary);
+        margin: 1rem 0;
+        font-size: 1.15rem;
+      }
+
+      .search input {
+        border: none;
+        outline: none;
+        padding: 0.5rem;
+        width: 100%;
+        margin: 0 0 3.5rem 0;
+        border-radius: 0.15rem;
+        color: #000;
+      }
+
+
+
+
+
+
+
+
+
 @media screen and (min-width:450px){
   .login-form, .register-form {
     width: 400px;
@@ -505,6 +595,9 @@ html, body{
   #home {
     padding: 0 10%;
   }
+  #dashboard {
+    padding: 100px 10%;
+  }
   .top-nav {
     padding: 1.5rem 10%;
   }
@@ -606,6 +699,9 @@ html, body{
 @media screen and (min-width:2100px) {
   #home{
     padding: 0 15%;
+  }
+  #dashboard {
+    padding: 100px 15%;
   }
   .top-nav {
     padding: 1.5rem 15%;
