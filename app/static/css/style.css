@@ -13,6 +13,9 @@
   --third: #DBFFF5;
   --third: #c7fced;
   --white: #fff;
+  --myColor: rgb(199, 218, 199);
+  --myColor:rgba(255,255,255,0.5);
+  --myColor:rgba(255,255,255,0.5);
   --transition-350: all 350ms ease-in-out;
   --transition-450: all 450ms ease-in-out;
 }
@@ -81,6 +84,19 @@ html, body{
   border: 2px solid var(--secondary);
   background-color: var(--secondary);
   color: var(--white);
+  cursor: pointer;
+  transition: var(--transition-350);
+}
+
+.btn-light-outline {
+  border: 2px solid var(--white);
+  background-color: transparent;
+  color: var(--white);
+}
+.btn-light-outline:hover {
+  border: 2px solid var(--white);
+  background-color: var(--white);
+  color: var(--primary);
   cursor: pointer;
   transition: var(--transition-350);
 }
@@ -358,20 +374,25 @@ html, body{
 }
 
   .profile {
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
     text-align: center;
     border-radius: 0.15rem;
     background-color: var(--secondary);
+    background-color: var(--white);
     padding: 1rem;
+    background-color: var(--myColor);
   }
 
-    .profile h2 {
-      padding-bottom: 0.5rem;
-      color: var(--white);
-    }
-    .profile .username {
+
+    .profile .username{
+      text-align: center;
       color: var(--bgColor);
+      color: var(--white);
+      color: var(--primary);
       padding-bottom: 0.5rem;
       border-bottom: 2px solid var(--bgColor);
+      border-bottom: 2px solid var(--white);
+      border-bottom: 2px solid var(--primary);
       margin-bottom: 1rem;
     }
 
@@ -384,9 +405,11 @@ html, body{
     .account-balance h3 {
       margin-bottom: 1rem;
     }
-    .account-balance p {
+    .balance {
+      text-align: center;
+      color: var(--primary);
       border-radius: 0.15rem;
-      background-color: #fff;
+      background-color: var(--bgColor);
       font-size: 1.15rem;
       border: 2px solid var(--primary);
       padding: 0.5rem 0;
@@ -397,13 +420,18 @@ html, body{
     /* search form */
     .search {
       background-color: var(--third);
+      background-color: var(--white);
+      background-color: var(--myColor);
       padding: 1rem 2rem;
       border-radius: 0.15rem;
+      box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
     }
       .search h2 {
         text-align: center;
+        color: var(--white);
         color: var(--primary);
         padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--white);
         border-bottom: 2px solid var(--primary);
       }
 
@@ -419,17 +447,40 @@ html, body{
         outline: none;
         padding: 0.5rem;
         width: 100%;
-        margin: 0 0 3.5rem 0;
+        margin: 0 0 1.5rem 0;
+        background-color: var(--bgColor);
         border-radius: 0.15rem;
         color: #000;
+        border: 2px solid var(--white);
       }
 
       .search input:focus {
         border: 2px solid var(--secondary);
         color: #000;
       }
-
-
+    
+  .latest-trade {
+    padding: 1rem;
+    background-color: var(--white);
+    background-color: var(--myColor);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+  }
+    .latest-trade h2 {
+      text-align: center;
+      color: var(--white);
+      color: var(--primary);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--white);
+      border-bottom: 2px solid var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .latest-trade h3 {
+      margin: 1rem 0;
+      text-align: center;
+      color: var(--primary);
+      /* color: var(--white); */
+    }
 
 
 
