@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
+<body class="bg-secondary">
   <!-- nav and hero content container -->
   <!-- top navigation -->
   <nav class="top-nav">
@@ -32,10 +32,10 @@
   <main id="dashboard">
 
 
-    <article class="profile">
+    <article class="card profile">
 
       <!-- <h2>John Smith</h2> -->
-      <h2 class="username">@johnsmith</h2>
+      <h2 class="sub-heading">@johnsmith</h2>
       
       <div class="account-balance">
         <h3>Account Balance:</h3>
@@ -44,11 +44,11 @@
 
     </article>
 
-    <article class="search">
+    <article class="card search">
       
       <form action="/search">
       {% csrf_token %}
-        <h2>Make a trade</h2>
+        <h2 class="sub-heading">Make a trade</h2>
 
         <label for="symbol">Symbol</label>
         <input type="text" name="symbol">
@@ -60,11 +60,37 @@
 
     </article>
 
-    <article class="latest-trade">
-      <h2>Latest Trade</h2>
+    <article class="card latest-trade">
+      <h2 class="sub-heading">Latest Trade</h2>
       <h3>AAPL</h3>
       <p class="balance">$340.23</p>
       <button class="btn btn-block btn-xl btn-primary">View</button>
+    </article>
+
+    <article class="card all-trades">
+      <h3 class="sub-heading">All Trades</h3>
+
+      <div class="stock">
+
+        <p>AAPL</p>
+        <p>$123.23</p>
+
+      </div>
+
+      <div class="stock">
+
+        <p>AAPL</p>
+        <p>$123.23</p>
+
+      </div>
+
+      <div class="stock">
+
+        <p>AAPL</p>
+        <p>$123.23</p>
+
+      </div>
+
     </article>
 
 

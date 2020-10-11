@@ -13,9 +13,6 @@
   --third: #DBFFF5;
   --third: #c7fced;
   --white: #fff;
-  --myColor: rgb(199, 218, 199);
-  --myColor:rgba(255,255,255,0.5);
-  --myColor:rgba(255,255,255,0.5);
   --transition-350: all 350ms ease-in-out;
   --transition-450: all 450ms ease-in-out;
 }
@@ -26,7 +23,11 @@ html, body{
   min-height: 100vh;
 }
 /* utility classes */
+.bg-secondary{
+  background-color: var(--secondary);
+}
 .btn {
+  font-size: 1rem;
   border-radius: 0.15rem;
   padding: 0.15rem 1.15rem;
   font-weight: 700;
@@ -99,6 +100,21 @@ html, body{
   color: var(--primary);
   cursor: pointer;
   transition: var(--transition-350);
+}
+
+.card {
+  background-color: var(--bgColor);
+  padding: 1rem;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 0.15rem;
+}
+
+.sub-heading {
+  text-align: center;
+  color: var(--primary);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary);
+  margin-bottom: 1rem;
 }
 
 
@@ -367,36 +383,15 @@ html, body{
 
 #dashboard {
   width: 100%;
-  padding: 100px 5%;
+  padding: 116px 5%;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: auto auto auto;
   grid-gap: 2rem;
 }
 
-  .profile {
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
-    text-align: center;
-    border-radius: 0.15rem;
-    background-color: var(--secondary);
-    background-color: var(--white);
-    padding: 1rem;
-    background-color: var(--myColor);
-  }
-
-
-    .profile .username{
-      text-align: center;
-      color: var(--bgColor);
-      color: var(--white);
-      color: var(--primary);
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--bgColor);
-      border-bottom: 2px solid var(--white);
-      border-bottom: 2px solid var(--primary);
-      margin-bottom: 1rem;
-    }
 
     .account-balance{
+      text-align: center;
       color: var(--primary);
       background-color: var(--third);
       padding: 1rem;
@@ -409,7 +404,7 @@ html, body{
       text-align: center;
       color: var(--primary);
       border-radius: 0.15rem;
-      background-color: var(--bgColor);
+      background-color: var(--white);
       font-size: 1.15rem;
       border: 2px solid var(--primary);
       padding: 0.5rem 0;
@@ -419,22 +414,8 @@ html, body{
 
     /* search form */
     .search {
-      background-color: var(--third);
-      background-color: var(--white);
-      background-color: var(--myColor);
       padding: 1rem 2rem;
-      border-radius: 0.15rem;
-      box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
     }
-      .search h2 {
-        text-align: center;
-        color: var(--white);
-        color: var(--primary);
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid var(--white);
-        border-bottom: 2px solid var(--primary);
-      }
-
       .search label {
         display: block;
         color: var(--primary);
@@ -448,10 +429,10 @@ html, body{
         padding: 0.5rem;
         width: 100%;
         margin: 0 0 1.5rem 0;
-        background-color: var(--bgColor);
+        background-color: var(--white);
         border-radius: 0.15rem;
         color: #000;
-        border: 2px solid var(--white);
+        border: 2px solid var(--primary);
       }
 
       .search input:focus {
@@ -462,7 +443,7 @@ html, body{
   .latest-trade {
     padding: 1rem;
     background-color: var(--white);
-    background-color: var(--myColor);
+    background-color: var(--bgColor);
     box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
   }
     .latest-trade h2 {
@@ -481,6 +462,20 @@ html, body{
       color: var(--primary);
       /* color: var(--white); */
     }
+  
+    .stock {
+      margin: 1rem 0;
+      display: flex;
+      padding: 1rem; 
+      border-bottom: 1px dotted var(--secondary);
+    }
+      .stock p:first-child {
+        width: 50%;
+      }
+      .stock p:last-child {
+        width: 50%;
+        text-align: right;
+      }
 
 
 
@@ -653,7 +648,7 @@ html, body{
     padding: 0 10%;
   }
   #dashboard {
-    padding: 100px 10%;
+    padding: 116px 10%;
   }
   .top-nav {
     padding: 1.5rem 10%;
@@ -758,7 +753,7 @@ html, body{
     padding: 0 15%;
   }
   #dashboard {
-    padding: 100px 15%;
+    padding: 116px 15%;
   }
   .top-nav {
     padding: 1.5rem 15%;
