@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTrade</title>
+  {% load static %}
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-secondary">
+  <input type="hidden" value="{{ results }}" id="results">
+  <!-- nav and hero content container -->
+  <!-- top navigation -->
+  <nav class="top-nav">
+    <!-- nav logo -->
+    <nav class="nav-left">
+      
+      <img src="../static/images/logo.svg" alt="Logo">
+      <h1>MyTrade</h1>
+      
+    </nav>
+    
+    <!-- navigation links -->
+    <nav class="nav-right-dash">
+      
+      <a class="btn btn-primary" href="#">Logout</a>
+      
+    </nav>
+
+  </nav>
+  
+  
+  <main id="search-results">
+
+    <table id="search-table">
+      <thead>
+        <th>Symbol</th>
+        <th>Current Price</th>
+        <th># of Shares</th>
+        <th>Purchase</th>
+      </thead>
+      <tbody>
+        <td>{{ symbol }}</td>
+        <td>${{ current }}</td>
+        <td>
+          <input type="number" value="1">
+        </td>
+        <td>
+          <button class="btn btn-secondary">See Total</button>
+        </td>
+      </tbody>
+    </table>
+
+  </main>
+
+
+</body>
+</html>

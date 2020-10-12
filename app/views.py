@@ -19,3 +19,15 @@ def dashboard(request):
     'first': res[0],
   }
   return render(request, 'dashboard.html', context)
+
+def search(request):
+  key = os.environ.get('FINHUB_API_KEY')
+  symbol = 'AAPL'
+  r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
+  res = r.json()
+  context = {
+    'results': json.dumps(r.json()),
+    'current': res['c'],
+    'symbol': symbol,
+  }
+  return render(request, 'search.html', context)
