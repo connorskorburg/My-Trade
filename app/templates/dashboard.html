@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body class="bg-secondary">
+  <input type="hidden" value="{{ results }}" id="results">
   <!-- nav and hero content container -->
   <!-- top navigation -->
   <nav class="top-nav">
@@ -67,6 +68,31 @@
       <button class="btn btn-block btn-xl btn-primary">View</button>
     </article>
 
+
+    <article class="card add-balance">
+      <h3 class="sub-heading">Add Balance</h3>
+      <form action="/add_balance" method="post">
+        {% csrf_token %}
+        <label for="amount">Amount</label>
+        <input type="text" name="amount">
+        <button type="submit" class="btn-primary btn-xl btn-block">Add</button>
+      </form>
+    </article>
+
+    <article class="card news">
+      <h3 class="sub-heading">News</h3>
+      <div class="news-content" id="0">
+        <img class='news-img' src="{{first.image}}" alt="{{first.source}}">
+        <h4 id="headline">{{ first.headline }}</h4>
+        <a class="btn btn-secondary news-link btn-block btn-xl" href="{{first.url}}">Visit <span class="source" >{{first.source}}</span></a>
+        <div class="btn-container">
+          <button class="btn btn-xl btn-secondary" id="prev">Prev</button>
+          <button class="btn btn-xl btn-secondary" id="next">Next</button>
+        </div>
+      </div>
+    </article>
+
+
     <article class="card all-trades">
       <h3 class="sub-heading">All Trades</h3>
 
@@ -94,7 +120,9 @@
     </article>
 
 
+
   </main>
   
+  <script src="{% static 'js/news.js' %}"></script>
 </body>
 </html>
