@@ -376,7 +376,10 @@ html, body{
       transition: var(--transition-350);
     }
 
-
+.container {
+  width: 100%;
+  padding: 116px 5%;
+}
 
 
 
@@ -386,8 +389,6 @@ html, body{
 }
 
 #dashboard {
-  width: 100%;
-  padding: 116px 5%;
   display: grid;
   grid-template-columns: auto auto auto;
   grid-template-columns: 1fr 1fr 1fr;
@@ -550,10 +551,7 @@ html, body{
   }
 
 /* search results */
-#search-results {
-  width: 100%;
-  padding: 116px 5%;
-}
+
   /* table styling */
   .table {
     border-spacing: 0px;
@@ -611,6 +609,42 @@ html, body{
   #total-section {
     display: none;
   }
+
+#trades {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: 2rem;
+}
+  .purchased-trades {
+    align-self: flex-start;
+  }
+  #trades-flex {
+    align-self: flex-start;
+  }
+  #trades .add-balance, #sold-trades {
+    margin-top: 2rem;
+  }
+  .trade-heading {
+    padding-bottom: 1rem;
+    color: var(--third);
+  }
+  #purchased-table {
+    margin-bottom: 2rem;
+  }
+  #purchased-table tr{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    text-align: center;
+  }
+  #sold-table tr{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+  }
+    #purchased-table tr td, #sold-table tr td {
+      padding: 1rem 0;
+    }
+
 
 @media screen and (min-width:450px){
   .login-form, .register-form {
@@ -775,7 +809,7 @@ html, body{
   #home {
     padding: 0 10%;
   }
-  #dashboard, #search-results {
+  .container {
     padding: 116px 10%;
   }
   .top-nav {
@@ -880,7 +914,7 @@ html, body{
   #home{
     padding: 0 15%;
   }
-  #dashboard, #search-results {
+  .container {
     padding: 116px 15%;
   }
   .top-nav {

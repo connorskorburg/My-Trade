@@ -19,7 +19,7 @@ def dashboard(request):
     'first': res[0],
   }
   return render(request, 'dashboard.html', context)
-
+# render search page
 def search(request):
   key = os.environ.get('FINHUB_API_KEY')
   symbol = 'AAPL'
@@ -31,3 +31,6 @@ def search(request):
     'symbol': symbol,
   }
   return render(request, 'search.html', context)
+# render sold trades 
+def trades(request):
+  return render(request, 'trades.html')

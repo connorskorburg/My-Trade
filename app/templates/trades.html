@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyTrade</title>
+  {% load static %}
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-secondary">
+  <!-- nav and hero content container -->
+  <!-- top navigation -->
+  <nav class="top-nav">
+    <!-- nav logo -->
+    <nav class="nav-left">
+      
+      <img src="../static/images/logo.svg" alt="Logo">
+      <h1>MyTrade</h1>
+      
+    </nav>
+    
+    <!-- navigation links -->
+    <nav class="nav-right-dash">
+      
+      <a href="/dashboard" class="btn nav-link">Dashboard</a>
+      <a class="btn btn-primary" href="#">Logout</a>
+      
+    </nav>
+    
+  </nav>
+
+  <main class="container" id="trades">
+    <section id="trades-flex">
+
+      <article class="card profile">
+        
+        <!-- <h2>John Smith</h2> -->
+        <h2 class="sub-heading">@johnsmith</h2>
+        
+        <div class="account-balance">
+          <h3>Account Balance:</h3>
+          <p class="balance">$1300.00</p>
+        </div>
+        
+      </article>
+
+      <article class="card add-balance">
+        <h3 class="sub-heading">Add Balance</h3>
+        <form action="/add_balance" method="post">
+          {% csrf_token %}
+          <label for="amount">Amount</label>
+          <input type="text" name="amount">
+          <button type="submit" class="btn-primary btn-xl btn-block">Add</button>
+        </form>
+      </article>
+
+      
+    </section>
+
+    <section class="purchased-trades">
+      <article>
+        
+        <table class="table" id="purchased-table">
+          <h2 class="trade-heading">Purchased</h2>
+          <thead>
+            <th>Symbol</th>
+            <th>Price Per Share</th>
+            <th># of Shares</th>
+            <th>Total Price</th>
+            <th>When Purchased</th>
+            <th>Sell Shares</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AAPL</td>
+              <td>$115.23</td>
+              <td>2</td>
+              <td>$230.46</td>
+              <td>October 15, 2020</td>
+              <td><a href="/sell" class="btn btn-primary btn-xl">Sell</a></td>
+            </tr>
+            <tr>
+              <td>AAPL</td>
+              <td>$115.23</td>
+              <td>2</td>
+              <td>$230.46</td>
+              <td>October 15, 2020</td>
+              <td><a href="/sell" class="btn btn-primary btn-xl">Sell</a></td>
+            </tr>
+            <tr>
+              <td>AAPL</td>
+              <td>$115.23</td>
+              <td>2</td>
+              <td>$230.46</td>
+              <td>October 15, 2020</td>
+              <td><a href="/sell" class="btn btn-primary btn-xl">Sell</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </article>
+
+      <article class="sold-trades">
+        
+        <table class="table" id="sold-table">
+          <h2 class="trade-heading">Sold</h2>
+          <thead>
+            <th>Symbol</th>
+            <th>Price Per Share</th>
+            <th># of Shares</th>
+            <th>Balance Added</th>
+            <th>When Sold</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AAPL</td>
+              <td>$115.23</td>
+              <td>2</td>
+              <td>$230.46</td>
+              <td>October 15, 2020</td>
+            </tr>
+            <tr>
+              <td>AAPL</td>
+              <td>$115.23</td>
+              <td>2</td>
+              <td>$230.46</td>
+              <td>October 15, 2020</td>
+            </tr>
+            <tr>
+              <td>AAPL</td>
+              <td>$115.23</td>
+              <td>2</td>
+              <td>$230.46</td>
+              <td>October 15, 2020</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </article>   
+  
+    </section>
+
+  </main>
