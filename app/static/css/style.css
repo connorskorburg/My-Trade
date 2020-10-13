@@ -554,22 +554,32 @@ html, body{
   width: 100%;
   padding: 116px 5%;
 }
-  #search-table {
+  /* table styling */
+  .table {
+    border-spacing: 0px;
     width: 100%;
     background-color: var(--bgColor);
-    padding: 2rem 0;
+    padding-bottom: 2rem;
     border-radius: 0.15rem;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
   }
-  #search-table th {
-    color: var(--primary);
+    .table thead {
+      background-color: var(--third);
+    }
+      .table th {
+        color: var(--primary);
+        padding: 1rem 0;
+      }
+  /* search table */
+  #search-table {
+    margin-bottom: 2rem;
   }
   #search-table td, #search-table th {
     width: 25%;
     font-size: 1.15rem;
     text-align: center;
   }
-  #search-table td {
+  #search-table td, #total-table td {
     padding-top: 1rem;
   }
     #search-table input {
@@ -582,6 +592,25 @@ html, body{
       border: 2px solid var(--primary);
     }
 
+  #total-table th, #total-table td {
+    width: 20%;
+    font-size: 1.15rem;
+    text-align: center;
+  }
+
+  .btn-table-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+  }
+    .btn-table-container .btn {
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+  #total-section {
+    display: none;
+  }
 
 @media screen and (min-width:450px){
   .login-form, .register-form {

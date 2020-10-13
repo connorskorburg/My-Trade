@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body class="bg-secondary">
-  <input type="hidden" value="{{ results }}" id="results">
   <!-- nav and hero content container -->
   <!-- top navigation -->
   <nav class="top-nav">
@@ -27,13 +26,17 @@
       <a class="btn btn-primary" href="#">Logout</a>
       
     </nav>
-
+    
   </nav>
   
+
+  <input type="hidden" value="{{ results }}" id="results">
+  <input type="hidden" value="{{ current }}" id="current">
+  <input type="hidden" value="{{ symbol }}" id="symbol">
   
   <main id="search-results">
-
-    <table id="search-table">
+    
+    <table id="search-table" class="table">
       <thead>
         <th>Symbol</th>
         <th>Current Price</th>
@@ -44,16 +47,41 @@
         <td>{{ symbol }}</td>
         <td>${{ current }}</td>
         <td>
-          <input type="number" value="1">
+          <input id="shares" type="number" value="1"  min="1" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
         </td>
         <td>
-          <button class="btn btn-secondary">See Total</button>
+          <button id="toggleTotal" class="btn btn-secondary">See Total</button>
         </td>
       </tbody>
     </table>
+    
+    <section id="total-section">
+      <table id="total-table" class="table">
+        <thead>
+          <th>Symbol</th>
+          <th>Current Price</th>
+          <th># of Shares</th>
+          <th>Account Balance</th>
+          <th>Total</th>
+        </thead>
+        <tbody>
+          <td>{{ symbol }}</td>
+          <td><span>$</span><span id="total-price"></span></td>
+          <td id="total-shares">1</td>
+          <td><span>$</span><span id="total-balance">1300.00</span></td>
+          <td>
+            <button id="toggleTotal" class="btn btn-secondary">See Total</button>
+          </td>
+        </tbody>
+      </table>
+      <div class="btn-table-container">
+        <button class="btn btn-xl btn-primary">Confirm Purchase</button>
+      </div>
+    </section>
+
 
   </main>
 
-
+  <script src="{% static 'js/stockToggler.js' %}"></script>
 </body>
 </html>
