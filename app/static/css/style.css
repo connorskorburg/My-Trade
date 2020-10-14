@@ -33,6 +33,13 @@ html, body{
   font-weight: 700;
   text-decoration: none;
 }
+.btn-sm {
+  font-size: 0.85rem;
+  border-radius: 0.15rem;
+  padding: 0.15rem 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+}
 .btn-block {
   width: 100%;
   display: block;
@@ -158,12 +165,16 @@ html, body{
         text-decoration: none;
       }
       .nav-link {
+        margin-right: 1rem;
         border: 2px solid transparent;
         color: var(--secondary);
       }
       .nav-link:hover {
         border-bottom: 2px solid var(--secondary);
         transition: var(--transition-350);
+      }
+      .bottom-nav {
+        display: none;
       }
 
 /* login/register popup */
@@ -654,6 +665,32 @@ html, body{
 }
 
 @media screen and (min-width: 200px) and (max-width: 700px){
+  .nav-right-dash {
+    display: none;
+  }
+  .bottom-nav {
+    display: flex;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: var(--third);
+    z-index: 123432;
+  }
+    .bottom-nav-link {
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 1rem 0;
+      width: 50%;
+      text-align: center;
+      color: var(--primary);
+    }
+    .bottom-nav-link:hover {
+      background-color: var(--primary);
+      color: var(--bgColor);
+      transition: var(--transition-450);
+    }
+
   #dashboard {
     grid-template-columns: 1fr;
   }
@@ -668,7 +705,7 @@ html, body{
     font-size: 0.75rem;
   }
   .trade-table input {
-    width: 2rem;
+    width: 3rem;
   }
 
   #trades-flex .add-balance{
@@ -780,6 +817,13 @@ html, body{
     }
 }
 @media screen and (min-width:701px){
+  .btn-sm {
+    font-size: 1rem;
+    border-radius: 0.15rem;
+    padding: 0.15rem 1.15rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
   .hero-mobile, .about-mobile, #hamburger, #nav-mobile {
     display: none;
   }

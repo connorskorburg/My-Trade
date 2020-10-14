@@ -28,6 +28,11 @@
     </nav>
     
   </nav>
+
+  <nav class="bottom-nav">
+    <a href="/dashboard" class="bottom-nav-link">Dashboard</a>
+    <a href="/logout" class="bottom-nav-link">Logout</a>
+  </nav>
   
 
   <input type="hidden" value="{{ results }}" id="results">
@@ -50,7 +55,7 @@
           <input id="shares" type="number" value="1"  min="1" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
         </td>
         <td>
-          <button onclick=buyTrade() class="btn btn-secondary">Total</button>
+          <button onclick=buyTrade() class="btn-sm btn-secondary">Total</button>
         </td>
       </tbody>
     </table>
