@@ -30,6 +30,16 @@
     
   </nav>
 
+  {% if messages %}
+  <div class="messages messages-error">
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <p class="error">{{ message }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <nav class="bottom-nav">
     <a href="/dashboard" class="bottom-nav-link">Dashboard</a>
     <a href="/logout" class="bottom-nav-link">Logout</a>
@@ -45,7 +55,7 @@
         
         <div class="account-balance">
           <h3>Account Balance:</h3>
-          <p class="balance">$1300.00</p>
+          <p class="balance">${{ balance }}</p>
         </div>
         
       </article>
@@ -55,7 +65,7 @@
         <form action="/add_balance" method="post">
           {% csrf_token %}
           <label for="amount">Amount</label>
-          <input type="text" name="amount">
+          <input type="number" name="amount">
           <button type="submit" class="btn-primary btn-xl btn-block">Add</button>
         </form>
       </article>

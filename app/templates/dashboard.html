@@ -80,7 +80,7 @@
       <form action="/add_balance" method="post">
         {% csrf_token %}
         <label for="amount">Amount</label>
-        <input type="text" name="amount">
+        <input type="number" name="amount">
         <button type="submit" class="btn-primary btn-xl btn-block">Add</button>
       </form>
     </article>

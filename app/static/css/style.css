@@ -25,8 +25,9 @@ html, body{
 /* utility classes */
 .messages-error {
   position: absolute;
-  top: 116px;
+  top: 84px;
   width: 100%;
+  z-index: 1343223423424;
 }
   .error {
     background-color: #ff7070;

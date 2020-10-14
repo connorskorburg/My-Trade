@@ -91,39 +91,90 @@ def dashboard(request):
       'results': json.dumps(r.json()),
       'first': res[0],
       'user': user,
-      'balance': user['account_balance'],
+      'balance': "{:.2f}".format(user['account_balance']),
     }
     return render(request, 'dashboard.html', context)
 
 
 # render search page
 def search(request):
-  key = os.environ.get('FINHUB_API_KEY')
-  symbol = 'AAPL'
-  r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
-  res = r.json()
-  context = {
-    'results': json.dumps(r.json()),
-    'current': res['c'],
-    'symbol': symbol,
-  }
-  return render(request, 'search.html', context)
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    key = os.environ.get('FINHUB_API_KEY')
+    symbol = 'AAPL'
+    r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
+    res = r.json()
+    context = {
+      'results': json.dumps(r.json()),
+      'current': res['c'],
+      'symbol': symbol,
+    }
+    return render(request, 'search.html', context)
 
 
 # render search page
 def sell(request):
-  key = os.environ.get('FINHUB_API_KEY')
-  symbol = 'AAPL'
-  r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
-  res = r.json()
-  context = {
-    'results': json.dumps(r.json()),
-    'current': res['c'],
-    'symbol': symbol,
-  }
-  return render(request, 'sell.html', context)
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    key = os.environ.get('FINHUB_API_KEY')
+    symbol = 'AAPL'
+    r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
+    res = r.json()
+    context = {
+      'results': json.dumps(r.json()),
+      'current': res['c'],
+      'symbol': symbol,
+    }
+    return render(request, 'sell.html', context)
 
 
 # render sold trades 
 def trades(request):
-  return render(request, 'trades.html')
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    mysql = MySQLConnection('MyTradeDB')
+    query = 'SELECT * FROM user WHERE id = %(id)s'
+    data = {
+      'id': request.session['user_id']
+    }
+    users = mysql.query_db(query, data)
+    user = users[0]
+    context = {
+      'balance': "{:.2f}".format(user['account_balance']),
+    }
+    return render(request, 'trades.html', context)
+
+# add balance
+def add_balance(request):
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    if request.POST['amount'] == '':
+      messages.error(request, 'Please Enter Amount!')
+      return redirect('/trades')
+    elif float(request.POST['amount']) > 1000:
+      messages.error(request, 'Amount Must Be $1000 or less!')
+      return redirect('/trades')
+    else:
+      print('success')
+      mysql = MySQLConnection('MyTradeDB')
+      query = 'SELECT * FROM user WHERE id = %(id)s'
+      data = {
+        'id': request.session['user_id']
+      }
+      users = mysql.query_db(query, data)
+      user = users[0]
+      new_balance = float(request.POST['amount']) + float(user['account_balance'])
+      mysql = MySQLConnection('MyTradeDB')
+      balance_query = 'UPDATE user SET account_balance = %(balance)s WHERE id = %(id)s;'
+      balance_data = {
+        'balance': new_balance,
+        'id': request.session['user_id'],
+      }
+      updated_user = mysql.query_db(balance_query, balance_data)
+      print(updated_user)
+      return redirect('/trades')
+  return redirect('/')
