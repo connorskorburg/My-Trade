@@ -608,15 +608,16 @@ html, body{
     display: none;
   }
 
-#trades {
+/* #trades {
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-gap: 2rem;
-}
+} */
   .purchased-trades {
     align-self: flex-start;
   }
   #trades-flex {
+    /* display: flex; */
     align-self: flex-start;
   }
   #trades .add-balance, #sold-trades {
@@ -631,12 +632,12 @@ html, body{
   }
   #purchased-table tr{
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     text-align: center;
   }
   #sold-table tr{
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     text-align: center;
   }
     #purchased-table tr td, #sold-table tr td {
@@ -670,6 +671,9 @@ html, body{
     width: 2rem;
   }
 
+  #trades-flex .add-balance{
+    margin-bottom: 2rem;
+  }
 
   #hero-content, #about-inner {
     padding-top: calc(10% + 84px);
@@ -826,6 +830,9 @@ html, body{
     .contact-left textarea{
       height: 10rem;
     }
+      #trades-flex .add-balance {
+        margin-bottom: 2rem;
+      }
 }
 
 @media screen and (min-width: 1051px){
@@ -875,6 +882,11 @@ html, body{
   }
   .contact-left textarea{
     height: 10rem;
+  }
+  #trades {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 2rem;
   }
   
 }
