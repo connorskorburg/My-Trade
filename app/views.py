@@ -42,7 +42,7 @@ def sell(request):
     'current': res['c'],
     'symbol': symbol,
   }
-  return render(request, 'search.html', context)
+  return render(request, 'sell.html', context)
 # render sold trades 
 def trades(request):
   return render(request, 'trades.html')
