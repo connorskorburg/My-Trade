@@ -6,5 +6,5 @@ urlpatterns = [
     path('dashboard', views.dashboard),
     path('search', views.search),
     path('trades', views.trades),
+    path('sell', views.sell),
 ]
- 

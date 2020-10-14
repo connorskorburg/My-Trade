@@ -132,7 +132,7 @@ html, body{
     background-color: var(--bgColor);
     z-index: 10;
     position: fixed;
-    z-index: 125323;
+    z-index: 125;
     padding: 1.5rem 0;
     display: flex;
     width: 100%;
@@ -172,7 +172,7 @@ html, body{
   height: 100%;
   background-color: rgba(0,0,0,0.3);
   position: fixed;
-  z-index: 2134124234;
+  z-index: 213;
 }
   .login-form, .register-form {
     width: 90%;
@@ -644,6 +644,7 @@ html, body{
     #purchased-table tr td, #sold-table tr td {
       padding: 1rem 0;
     }
+
 
 
 @media screen and (min-width:450px){
