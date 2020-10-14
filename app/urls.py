@@ -7,4 +7,7 @@ urlpatterns = [
     path('search', views.search),
     path('trades', views.trades),
     path('sell', views.sell),
+    path('login', views.login),
+    path('logout', views.logout),
+    path('register', views.register),
 ]

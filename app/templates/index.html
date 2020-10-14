@@ -43,6 +43,16 @@
 
   </nav>
 
+  {% if messages %}
+  <div class="messages messages-error">
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <p class="error">{{ message }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <!-- log & reg popup -->
 
   <!-- login form popup -->
