@@ -512,7 +512,7 @@ html, body{
   /* news card */
   .news-content {
     margin: 0 auto;
-    width: 350px;
+    /* width: 350px; */
     padding-bottom: 1rem;
     background-color: var(--third);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -520,23 +520,23 @@ html, body{
   }
     .news h4 {
       text-align: center;
-      max-width: 325px;
+      /* max-width: 325px; */
       color: var(--primary);
       margin: 1rem auto;
     }
     .news img {
-      max-width: 350px;
+      /* max-width: 350px; */
       display: block;
       margin: 0 auto 1rem auto;
     }
     .news .btn {
-      max-width: 325px;
+      /* max-width: 325px; */
       margin: 0 auto;
     }
   
 /* btn classes for toggler */
   .btn-container {
-    max-width: 325px;
+    /* max-width: 325px; */
     margin: 0 auto;
     padding-top: 0.5rem;
     display: flex;
@@ -655,6 +655,19 @@ html, body{
 }
 
 @media screen and (min-width: 200px) and (max-width: 700px){
+  #dashboard {
+    grid-template-columns: 1fr;
+  }
+  
+  .news-content, .news img {
+    max-width: 100%;
+  }
+  
+  .news h4, .news .btn, .btn-container {
+    max-width: 90%;
+  }
+
+
   #hero-content, #about-inner {
     padding-top: calc(10% + 84px);
     padding-bottom: 15%;
@@ -763,8 +776,18 @@ html, body{
   .hero-mobile, .about-mobile, #hamburger, #nav-mobile {
     display: none;
   }
+    .news-content, .news img {
+      max-width: 350px;
+    }
+    
+    .news h4, .news .btn, .btn-container {
+      max-width: 325px;
+    }
 }
 @media screen and (min-width:701px) and (max-width: 1050px){
+  #dashboard {
+    grid-template-columns: repeat(2, 1fr);
+  }
   #hero-content, #about-inner {
     height: fit-content;
     padding-top: 15%;
