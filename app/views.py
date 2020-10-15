@@ -62,7 +62,7 @@ def register(request):
       'last_name': request.POST['last_name'],
       'username': request.POST['username'],
       'password': password_hash,
-      'account_balance': 0.00,
+      'account_balance': 1000.00,
     }
     user_id = mysql.query_db(query, data)
     request.session['user_id'] = user_id
@@ -97,21 +97,87 @@ def dashboard(request):
 
 
 # render search page
+def showSearch(request):
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else: 
+    key = os.environ.get('FINHUB_API_KEY')
+    symbol = request.session['symbol']
+    r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
+    res = r.json()
+    # find user balance
+    mysql = MySQLConnection('MyTradeDB')
+    query = 'SELECT * FROM user WHERE id = %(id)s'
+    data = {
+      'id': request.session['user_id']
+    }
+    users = mysql.query_db(query, data)
+    user = users[0]
+    print(user)
+    context = {
+      'results': json.dumps(r.json()),
+      'current': "{:.2f}".format(res['c']),
+      'symbol': symbol,
+      'balance': "{:.2f}".format(user['account_balance']),
+    }
+    return render(request, 'search.html', context)
+
+
 def search(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
-    key = os.environ.get('FINHUB_API_KEY')
-    symbol = 'AAPL'
-    r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
-    res = r.json()
-    context = {
-      'results': json.dumps(r.json()),
-      'current': res['c'],
-      'symbol': symbol,
-    }
-    return render(request, 'search.html', context)
+    print(request.POST)
+    if request.POST['symbol'] == '':
+      return redirect('/dashboard')
+    else:
+      request.session['symbol'] = request.POST['symbol']
+      return redirect('/showSearch')
 
+
+# buy trade
+def buyTrade(request):
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    if request.method == 'GET':
+      return redirect('/dashboard')
+    # connect to DB and add a new trade
+    mysql = MySQLConnection('MyTradeDB')
+    query = 'INSERT INTO trade (symbol, price_per_share, total_price, shares, created_at, updated_at, user_id) VALUES (%(symbol)s, %(price_per_share)s, %(total_price)s, %(shares)s, NOW(), NOW(), %(user_id)s);'
+    # set vars to be added to db
+    total = float(request.POST['total'])
+    price = float(request.POST['price'])
+    symbol = request.POST['symbol']
+    shares = int(request.POST['shares'])
+    # insert data
+    data = {
+      'symbol': symbol,
+      'price_per_share': price,
+      'total_price': total,
+      'shares': shares,
+      'user_id': request.session['user_id']
+    }
+    result = mysql.query_db(query, data)
+    print(result)
+    # # fetch user from DB
+    mysql = MySQLConnection('MyTradeDB')
+    user_query = 'SELECT * FROM user WHERE id = %(id)s'
+    user_data = {
+      'id': request.session['user_id']
+    }
+    users = mysql.query_db(user_query, user_data)
+    user = users[0]
+    # update user's account balance
+    new_balance = float(user['account_balance']) - float(request.POST['total'])
+    mysql = MySQLConnection('MyTradeDB')
+    balance_query = 'UPDATE user SET account_balance = %(balance)s WHERE id = %(id)s;'
+    balance_data = {
+      'balance': new_balance,
+      'id': request.session['user_id'],
+    }
+    updated_user = mysql.query_db(balance_query, balance_data)
+    return redirect('/trades')
 
 # render search page
 def sell(request):
@@ -152,7 +218,7 @@ def add_balance(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
-    if request.POST['amount'] == '':
+    if request.POST['amount'] == '' or float(request.POST['amount']) <= 0:
       messages.error(request, 'Please Enter Amount!')
       return redirect('/trades')
     elif float(request.POST['amount']) > 1000:

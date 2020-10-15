@@ -5,7 +5,16 @@ const buyTrade = () => {
   let total = shares * currentPrice;
   total = total.toFixed(2);
   document.getElementById('total-shares').textContent = shares;
+  document.getElementById('hidden-shares').value = shares;
   document.getElementById('total-price').textContent = total;
+  document.getElementById('hidden-total').value = total;
+  if (parseFloat(document.getElementById('total-balance').value) < total || shares === 0) {
+    document.getElementById('buy-btn').style.display = 'none';
+    console.log(parseFloat(document.getElementById('total-balance').value))
+  }
+  else if (parseFloat(document.getElementById('total-balance').value) > total) {
+    document.getElementById('buy-btn').style.display = 'block';
+  }
 }
 
 const sellTrade = () => {

@@ -631,11 +631,6 @@ html, body{
     display: none;
   }
 
-/* #trades {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 2rem;
-} */
   .purchased-trades {
     align-self: flex-start;
   }
@@ -666,6 +661,15 @@ html, body{
     #purchased-table tr td, #sold-table tr td {
       padding: 1rem 0;
     }
+
+    .not-found {
+      margin: 116px auto;
+      width: 75%;
+    }
+      .not-found h3 {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
 
 
 
@@ -829,6 +833,9 @@ html, body{
     }
 }
 @media screen and (min-width:701px){
+  .not-found {
+    width: 300px;
+  }
   .btn-sm {
     font-size: 1rem;
     border-radius: 0.15rem;

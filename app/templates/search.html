@@ -38,9 +38,11 @@
   <input type="hidden" value="{{ results }}" id="results">
   <input type="hidden" value="{{ current }}" id="current">
   <input type="hidden" value="{{ symbol }}" id="symbol">
+  <input type="hidden" value="{{ balance }}" id="total-balance">
   
   <main id="search-results" class="container">
     
+    {% if current != "0.00" %}
     <table class="trade-table table">
       <thead>
         <th>Symbol</th>
@@ -72,13 +74,26 @@
           <td>{{ symbol }}</td>
           <td><span>$</span><span id="total-price"></span></td>
           <td id="total-shares">1</td>
-          <td><span>$</span><span id="total-balance">1300.00</span></td>
+          <td><span>$</span><span>{{ balance }}</span></td>
         </tbody>
       </table>
       <div class="btn-table-container">
-        <button class="btn btn-xl btn-primary">Confirm Purchase</button>
+        <form action="/buyTrade" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="symbol" value="{{ symbol }}">
+          <input type="hidden" name="shares" id="hidden-shares">
+          <input type="hidden" name="price" id="hidden-price" value="{{ current }}">
+          <input type="hidden" name="total" id="hidden-total">
+          <button id="buy-btn" class="btn btn-xl btn-primary">Confirm Purchase</button>
+        </form>
       </div>
     </section>
+    {% elif current == "0.00" %}
+    <div class="not-found">
+      <h3>Stock Not Found, Go back to dash</h3>
+      <a href="/dashboard" class="btn btn-block btn-primary">Dashboard</a>
+    </div>
+    {% endif %}
 
 
   </main>

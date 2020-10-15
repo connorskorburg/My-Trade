@@ -53,12 +53,12 @@
 
     <article class="card search">
       
-      <form action="/search">
+      <form action="/search" method="POST">
       {% csrf_token %}
         <h2 class="sub-heading">Make a trade</h2>
 
         <label for="symbol">Symbol</label>
-        <input type="text" name="symbol">
+        <input type="text" name="symbol" onkeyup="this.value = this.value.toUpperCase();">
 
         <button class="btn btn-block btn-xl btn-primary">Search</button>
 
@@ -71,7 +71,7 @@
       <h2 class="sub-heading">Latest Trade</h2>
       <h3>AAPL</h3>
       <p class="balance">$340.23</p>
-      <button class="btn btn-block btn-xl btn-primary">View</button>
+      <a href='/trades' class="btn btn-block btn-xl btn-primary">View</a>
     </article>
 
 
@@ -79,8 +79,8 @@
       <h3 class="sub-heading">Add Balance</h3>
       <form action="/add_balance" method="post">
         {% csrf_token %}
-        <label for="amount">Amount</label>
-        <input type="number" name="amount">
+        <label for="amount" >Amount</label>
+        <input type="number" name="amount" step="0.01">
         <button type="submit" class="btn-primary btn-xl btn-block">Add</button>
       </form>
     </article>
