@@ -198,18 +198,40 @@ def buyTrade(request):
     return redirect('/trades')
 
 # render search page
-def sell(request):
+def sellTrade(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
-    key = os.environ.get('FINHUB_API_KEY')
-    symbol = 'AAPL'
-    r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
-    res = r.json()
+    print(request.POST)
+    return redirect('/trades')
+
+# sell trade
+def sell(request, id):
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    mysql = MySQLConnection('MyTradeDB')
+    user_query = 'SELECT * FROM user WHERE id = %(id)s'
+    user_data = {
+      'id': request.session['user_id']
+    }
+    users = mysql.query_db(user_query, user_data)
+    user = users[0]
+    user_query = 'SELECT * FROM'
+    mysql = MySQLConnection('MyTradeDB')
+    query = 'SELECT * FROM trade WHERE id = %(id)s;'
+    data = {
+      'id': id,
+    }
+    trade = mysql.query_db(query, data)
+    if len(trade) == 0:
+      trade = False
+    else:
+      trade = trade[0]
+    print(trade)
     context = {
-      'results': json.dumps(r.json()),
-      'current': res['c'],
-      'symbol': symbol,
+      'trade': trade,
+      'user': user,
     }
     return render(request, 'sell.html', context)
 

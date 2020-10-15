@@ -22,8 +22,8 @@
     
     <!-- navigation links -->
     <nav class="nav-right-dash">
-      <a href="/dashboard" class="btn nav-link">Dashboard</a>
-      <a class="btn btn-primary" href="#">Logout</a>
+      <a href="/trades" class="btn nav-link">Trades</a>
+      <a class="btn btn-primary" href="/logout">Logout</a>
       
     </nav>
     
@@ -35,8 +35,8 @@
   </nav>
   
 
-  <input type="hidden" value="{{ current }}" id="current-sell">
-  <input type="hidden" value="{{ symbol }}" id="symbol-sell">
+  <input type="hidden" value="{{ trade.price_per_share }}" id="current-sell">
+  <input type="hidden" value="{{ trade.shares }}" id="bought-shares">
   
   <main class="container">
     
@@ -50,10 +50,11 @@
         <th>Purchase</th>
       </thead>
       <tbody>
-        <td>{{ symbol }}</td>
-        <td>${{ current }}</td>
+        <td>{{ trade.symbol }}</td>
+        {% load humanize %}
+        <td>${{ trade.price_per_share|floatformat:2|intcomma }}</td>
         <td>
-          <input id="sell-shares" type="number" value="1"  min="1" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+          <input id="sell-shares" type="number" value="{{ trade.shares }}"  min="1" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
         </td>
         <td>
           <button onclick=sellTrade() class="btn-sm btn-secondary">Total</button>
@@ -65,19 +66,27 @@
       <table class="table total-table">
         <thead>
           <th>Symbol</th>
-          <th>Total Price</th>
+          <th>Total Gained</th>
           <th># of Shares</th>
-          <th>Amount Gained</th>
+          <th>Account Balance</th>
         </thead>
         <tbody>
-          <td>{{ symbol }}</td>
+          <td>{{ trade.symbol }}</td>
           <td><span>$</span><span id="total-gained"></span></td>
           <td id="total-sell-shares">1</td>
-          <td><span>$</span><span id="total-balance">1300.00</span></td>
+          {% load humanize %}
+          <td><span>$</span><span id="total-balance">{{ user.account_balance|floatformat:2|intcomma }}</span></td>
         </tbody>
       </table>
       <div class="btn-table-container">
-        <button class="btn btn-xl btn-primary">Sell Trade</button>
+        <form action="/sellTrade" method="POST">
+          {% csrf_token %}
+          <input type="hidden" name="trade_id" value="{{ trade.id }}">
+          <input type="hidden" name="price_sold" id="price_sold">
+          <input type="hidden" name="shares_sold" id="shares_sold">
+          <input type="hidden" name="total_price_gained" id="total_price_gained">
+          <button id="sell-btn" class="btn btn-xl btn-primary">Sell Trade</button>
+        </form>
       </div>
     </section>
 
