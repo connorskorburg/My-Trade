@@ -121,9 +121,10 @@
             {% for s in sold_trades %}
             <tr>
               <td>{{ s.symbol }}</td>
-              <td>{{ s.price_sold }}</td>
+              {% load humanize %}
+              <td>${{ s.price_sold|floatformat:2|intcomma }}</td>
               <td>{{ s.shares_sold }}</td>
-              <td>{{ s.total_price_gained }}</td>
+              <td>${{ s.total_price_gained|floatformat:2|intcomma }}</td>
             </tr>
             {% endfor %}
             <!-- <tr>

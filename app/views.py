@@ -197,13 +197,91 @@ def buyTrade(request):
     updated_user = mysql.query_db(balance_query, balance_data)
     return redirect('/trades')
 
+
+
+
 # render search page
 def sellTrade(request):
   if not 'user_id' in request.session:
     return redirect('/')
   else:
-    print(request.POST)
+
+
+    # get user 
+    mysql = MySQLConnection('MyTradeDB')
+    user_query = 'SELECT * FROM user WHERE id = %(user_id)s;'
+    user_data = {
+      'user_id': request.session['user_id']
+    }
+    users = mysql.query_db(user_query, user_data)
+    user = users[0]
+    print("USER", user)
+
+
+    # update user balance
+    new_balance = float(user['account_balance']) + float(request.POST['total_price_gained'])
+    print(new_balance)
+    mysql = MySQLConnection('MyTradeDB')
+    update_user_query = 'UPDATE user SET account_balance = %(balance)s WHERE id = %(user_id)s;'
+    update_user_data = {
+      'balance': new_balance,
+      'user_id': request.session['user_id'],
+    }
+    updated_user = mysql.query_db(update_user_query, update_user_data)
+
+
+    # get trade bought
+    mysql = MySQLConnection('MyTradeDB')
+    trade_query = 'SELECT * FROM trade WHERE id = %(trade_id)s;'
+    trade_data = {
+      'trade_id': request.POST['trade_id']
+    }
+    trades = mysql.query_db(trade_query, trade_data)
+    if len(trades) == 0:
+      trade = False
+    else: 
+      trade = trades[0]
+    print("TRADE",trade)
+
+
+    # updated trade bought
+    updated_shares = int(trade['shares']) - int(request.POST['shares_sold'])
+    updated_total_price = float(trade['total_price']) - float(request.POST['total_price_gained'])
+    print("UPDATED SHARES:", updated_shares)
+    print("UPDATED TOTAL:", updated_total_price)
+    mysql = MySQLConnection('MyTradeDB')
+    updated_trade_query = 'UPDATE trade SET shares = %(updated_shares)s, total_price = %(updated_total_price)s WHERE id = %(trade_id)s;'
+    updated_trade_data = {
+      'updated_shares': updated_shares,
+      'updated_total_price': updated_total_price,
+      'trade_id': request.POST['trade_id']
+    }
+    updated_trade = mysql.query_db(updated_trade_query, updated_trade_data)
+
+
+    # create sold trade
+    mysql = MySQLConnection('MyTradeDB')
+    sold_query = 'INSERT INTO sold_trade (symbol, price_sold, shares_sold, total_price_gained, created_at, updated_at, user_id, trade_id) VALUES (%(symbol)s, %(price_sold)s, %(shares_sold)s, %(total_price_gained)s, NOW(), NOW(), %(user_id)s, %(trade_id)s);'
+    sold_data = {
+      'symbol': request.POST['symbol'],
+      'price_sold': request.POST['price_sold'],
+      'shares_sold': request.POST['shares_sold'],
+      'total_price_gained': request.POST['total_price_gained'],
+      'user_id': request.session['user_id'],
+      'trade_id': request.POST['trade_id'],
+    }
+    sold_trade = mysql.query_db(sold_query, sold_data)
+    print('SYMBOL', request.POST['symbol'])
+    print("Trade ID",request.POST['trade_id'])
+    print("Price Sold",request.POST['price_sold'])
+    print("Shares Sold",request.POST['shares_sold'])
+    print("Total Gained",request.POST['total_price_gained'])
     return redirect('/trades')
+
+
+
+
+
 
 # sell trade
 def sell(request, id):
@@ -226,12 +304,19 @@ def sell(request, id):
     trade = mysql.query_db(query, data)
     if len(trade) == 0:
       trade = False
+      current = False
     else:
       trade = trade[0]
-    print(trade)
+      print(trade)
+      key = os.environ.get('FINHUB_API_KEY')
+      symbol = trade['symbol']
+      r = requests.get(f'https://finnhub.io/api/v1/quote?symbol={symbol}&token={key}')
+      res = r.json()
+      current = "{:.2f}".format(res['c'])
     context = {
       'trade': trade,
       'user': user,
+      'current': current
     }
     return render(request, 'sell.html', context)
 

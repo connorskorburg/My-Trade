@@ -52,7 +52,7 @@
       <tbody>
         <td>{{ trade.symbol }}</td>
         {% load humanize %}
-        <td>${{ trade.price_per_share|floatformat:2|intcomma }}</td>
+        <td>${{ current|floatformat:2|intcomma }}</td>
         <td>
           <input id="sell-shares" type="number" value="{{ trade.shares }}"  min="1" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');">
         </td>
@@ -81,6 +81,7 @@
       <div class="btn-table-container">
         <form action="/sellTrade" method="POST">
           {% csrf_token %}
+          <input type="hidden" name="symbol" value="{{ trade.symbol }}">
           <input type="hidden" name="trade_id" value="{{ trade.id }}">
           <input type="hidden" name="price_sold" id="price_sold">
           <input type="hidden" name="shares_sold" id="shares_sold">
