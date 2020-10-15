@@ -84,6 +84,18 @@ def dashboard(request):
     users = mysql.query_db(query, data)
     user = users[0]
     print(user)
+    # get latest trades
+    mysql = MySQLConnection('MyTradeDB')
+    trades_query = 'SELECT * FROM trade WHERE user_id = %(id)s ORDER BY created_at DESC LIMIT 10;'
+    trades_data = {
+      'id': request.session['user_id']
+    }
+    trades = mysql.query_db(trades_query, trades_data)
+    latest_trade = trades[0]
+    if len(trades) == 0:
+      trades = False
+      latest_trade = False
+    print(trades)
     key = os.environ.get('FINHUB_API_KEY')
     r = requests.get(f'https://finnhub.io/api/v1/news?category=general&token={key}')
     res = r.json()
@@ -92,6 +104,8 @@ def dashboard(request):
       'first': res[0],
       'user': user,
       'balance': "{:.2f}".format(user['account_balance']),
+      'latest_trade': latest_trade,
+      'trades': trades,
     }
     return render(request, 'dashboard.html', context)
 

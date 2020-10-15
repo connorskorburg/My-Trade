@@ -24,7 +24,7 @@
     <!-- navigation links -->
     <nav class="nav-right-dash">
       <a class="btn nav-link" href="/trades">Trades</a>
-      <a class="btn btn-primary" href="#">Logout</a>
+      <a class="btn btn-primary" href="/logout">Logout</a>
       
     </nav>
 
@@ -69,9 +69,14 @@
 
     <article class="card latest-trade">
       <h2 class="sub-heading">Latest Trade</h2>
-      <h3>AAPL</h3>
-      <p class="balance">$340.23</p>
+      {% if latest_trade == False %}
+      <h3 class="start-trading">Start Trading!</h3>
+      {% else %}
+      <h3>{{ latest_trade.symbol }}</h3>
+      {% load humanize %}
+      <p class="balance">PPS: ${{ latest_trade.price_per_share|floatformat:2|intcomma }}</p>
       <a href='/trades' class="btn btn-block btn-xl btn-primary">View</a>
+      {% endif %}
     </article>
 
 
@@ -81,7 +86,7 @@
         {% csrf_token %}
         <label for="amount" >Amount</label>
         <input type="number" name="amount" step="0.01">
-        <button type="submit" class="btn-primary btn-xl btn-block">Add</button>
+        <button type="submit" class="btn-primary btn btn-xl btn-block">Add</button>
       </form>
     </article>
 
@@ -101,27 +106,18 @@
 
     <article class="card all-trades">
       <h3 class="sub-heading">All Trades</h3>
-
-      <div class="stock">
-
-        <p>AAPL</p>
-        <p>$123.23</p>
-
-      </div>
-
-      <div class="stock">
-
-        <p>AAPL</p>
-        <p>$123.23</p>
-
-      </div>
-
-      <div class="stock">
-
-        <p>AAPL</p>
-        <p>$123.23</p>
-
-      </div>
+      {% if trades == False %}
+      <h3 class="start-trading">Start Trading!</h3>
+      {% else %}
+        {% for t in trades %}
+        <div class="stock">
+          <p>{{ t.symbol }}</p>
+          {% load humanize %}
+          <p>${{ t.price_per_share|floatformat:2|intcomma }}</p>
+        </div>
+        
+        {% endfor %}
+      {% endif %}
 
     </article>
 
