@@ -40,8 +40,11 @@ def login(request):
 
 # process logout
 def logout(request):
-  request.session.flush()
-  return redirect('/')
+  if not 'user_id' in request.session:
+    return redirect('/')
+  else:
+    request.session.flush()
+    return redirect('/')
 
 
 # process register
@@ -91,10 +94,11 @@ def dashboard(request):
       'id': request.session['user_id']
     }
     trades = mysql.query_db(trades_query, trades_data)
-    latest_trade = trades[0]
     if len(trades) == 0:
       trades = False
       latest_trade = False
+    else:
+      latest_trade = trades[0]
     print(trades)
     key = os.environ.get('FINHUB_API_KEY')
     r = requests.get(f'https://finnhub.io/api/v1/news?category=general&token={key}')
@@ -222,8 +226,27 @@ def trades(request):
     }
     users = mysql.query_db(query, data)
     user = users[0]
+    # find trades 
+    mysql = MySQLConnection('MyTradeDB')
+    trades_query = 'SELECT * FROM trade WHERE user_id = %(id)s ORDER BY created_at DESC LIMIT 10;'
+    trades_data = {
+      'id': request.session['user_id'],
+    }
+    trades = mysql.query_db(trades_query, trades_data)
+    if len(trades) == 0:
+      trades = False
+    mysql = MySQLConnection('MyTradeDB')
+    sold_query = 'SELECT * FROM sold_trade WHERE user_id = %(id)s ORDER BY created_at DESC LIMIT 10;'
+    sold_data = {
+      'id': request.session['user_id'],
+    }
+    sold_trades = mysql.query_db(sold_query, sold_data)
+    if len(sold_trades) == 0:
+      sold_trades = False
     context = {
       'balance': "{:.2f}".format(user['account_balance']),
+      'trades': trades,
+      'sold_trades': sold_trades,
     }
     return render(request, 'trades.html', context)
 

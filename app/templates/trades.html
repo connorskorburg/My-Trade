@@ -24,7 +24,7 @@
     <nav class="nav-right-dash">
       
       <a href="/dashboard" class="btn nav-link">Dashboard</a>
-      <a class="btn btn-primary" href="#">Logout</a>
+      <a class="btn btn-primary" href="/logout">Logout</a>
       
     </nav>
     
@@ -76,8 +76,11 @@
     <section class="purchased-trades">
       <article>
         
+        {% if trades == False%}
+        <h2 class="start-trading">Start Trading!</h2>
+        {% else %}
         <table class="table" id="purchased-table">
-          <h2 class="trade-heading">Purchased</h2>
+          <h2 class="trade-heading">Last 10 Purchased</h2>
           <thead>
             <th>Symbol</th>
             <th>Price Per Share</th>
@@ -86,44 +89,44 @@
             <th>Sell</th>
           </thead>
           <tbody>
-            <tr>
-              <td>AAPL</td>
-              <td>$115.23</td>
-              <td>2</td>
-              <td>$230.46</td>
-              <td><a href="/sell" class="btn-sm btn-primary btn-xl">Sell</a></td>
-            </tr>
-            <tr>
-              <td>AAPL</td>
-              <td>$115.23</td>
-              <td>2</td>
-              <td>$230.46</td>
-              <td><a href="/sell" class="btn-sm btn-primary btn-xl">Sell</a></td>
-            </tr>
-            <tr>
-              <td>AAPL</td>
-              <td>$115.23</td>
-              <td>2</td>
-              <td>$230.46</td>
-              <td><a href="/sell" class="btn-sm btn-primary btn-xl">Sell</a></td>
-            </tr>
+            {% for t in trades %}
+              <tr>
+                <td>{{ t.symbol }}</td>
+                {% load humanize %}
+                <td>${{ t.price_per_share|floatformat:2|intcomma }}</td>
+                <td>{{ t.shares }}</td>
+                <td>${{ t.total_price|floatformat:2|intcomma }}</td>
+                <td><a class="btn-sm btn-primary btn-xl" href="/sell/{{ t.id }}">Sell</a></td>
+              </tr>
+            {% endfor %}
           </tbody>
         </table>
+        {% endif %}
 
       </article>
 
       <article class="sold-trades">
+
+        {% if sold_trades != False%}
         
         <table class="table" id="sold-table">
-          <h2 class="trade-heading">Sold</h2>
+          <h2 class="trade-heading">Last 10 Sold</h2>
           <thead>
             <th>Symbol</th>
-            <th>Price Per Share</th>
+            <th>Price Sold</th>
             <th># of Shares</th>
             <th>Balance Added</th>
           </thead>
           <tbody>
+            {% for s in sold_trades %}
             <tr>
+              <td>{{ s.symbol }}</td>
+              <td>{{ s.price_sold }}</td>
+              <td>{{ s.shares_sold }}</td>
+              <td>{{ s.total_price_gained }}</td>
+            </tr>
+            {% endfor %}
+            <!-- <tr>
               <td>AAPL</td>
               <td>$115.23</td>
               <td>2</td>
@@ -140,9 +143,11 @@
               <td>$115.23</td>
               <td>2</td>
               <td>$230.46</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
+
+        {% endif %}
 
       </article>   
   
