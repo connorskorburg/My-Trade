@@ -242,7 +242,7 @@ def sellTrade(request):
     }
     updated_user = mysql.query_db(update_user_query, update_user_data)
 
-    # get trade bought
+    # get trade that was bought
     mysql = MySQLConnection('MyTradeDB')
     trade_query = 'SELECT * FROM trade WHERE id = %(trade_id)s;'
     trade_data = {
@@ -256,7 +256,7 @@ def sellTrade(request):
 
     # updated trade bought
     updated_shares = int(trade['shares']) - int(request.POST['shares_sold'])
-    updated_total_price = float(trade['total_price']) - float(request.POST['total_price_gained'])
+    updated_total_price = float(trade['price_per_share']) * float(updated_shares)
     mysql = MySQLConnection('MyTradeDB')
     updated_trade_query = 'UPDATE trade SET shares = %(updated_shares)s, total_price = %(updated_total_price)s WHERE id = %(trade_id)s;'
     updated_trade_data = {

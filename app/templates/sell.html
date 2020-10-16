@@ -36,7 +36,7 @@
   </nav>
   
 
-  <input type="hidden" value="{{ trade.price_per_share }}" id="current-sell">
+  <input type="hidden" value="{{ current }}" id="current-sell">
   <input type="hidden" value="{{ trade.shares }}" id="bought-shares">
   
   <main class="container">
@@ -84,6 +84,7 @@
           {% csrf_token %}
           <input type="hidden" name="symbol" value="{{ trade.symbol }}">
           <input type="hidden" name="trade_id" value="{{ trade.id }}">
+          <input type="hidden" name="pps" value="{{ trade.price_per_share }}" id="pps">
           <input type="hidden" name="price_sold" id="price_sold">
           <input type="hidden" name="shares_sold" id="shares_sold">
           <input type="hidden" name="total_price_gained" id="total_price_gained">
