@@ -69,22 +69,32 @@ def register(request):
     return redirect('/')
   # check to see if passwords match
   elif request.POST['password'] == request.POST['conf_password']:
-    # hash and salt password
-    password = request.POST['password']
-    password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
-    # create the user
     mysql = MySQLConnection('MyTradeDB')
-    query = 'INSERT INTO user (first_name, last_name, username, password, account_balance, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(username)s, %(password)s, %(account_balance)s, NOW(), NOW())'
-    data = {
-      'first_name': request.POST['first_name'],
-      'last_name': request.POST['last_name'],
-      'username': request.POST['username'],
-      'password': password_hash,
-      'account_balance': 1000.00,
+    find_user_query = 'SELECT * FROM user WHERE username = %(username)s;'
+    find_user_data = {
+      'username': request.POST['username']
     }
-    user_id = mysql.query_db(query, data)
-    request.session['user_id'] = user_id
-    return redirect('/dashboard')
+    found_user = mysql.query_db(find_user_query, find_user_data)
+    if len(found_user) == 0:
+      # hash and salt password
+      password = request.POST['password']
+      password_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+      # create the user
+      mysql = MySQLConnection('MyTradeDB')
+      query = 'INSERT INTO user (first_name, last_name, username, password, account_balance, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(username)s, %(password)s, %(account_balance)s, NOW(), NOW())'
+      data = {
+        'first_name': request.POST['first_name'],
+        'last_name': request.POST['last_name'],
+        'username': request.POST['username'],
+        'password': password_hash,
+        'account_balance': 1000.00,
+      }
+      user_id = mysql.query_db(query, data)
+      request.session['user_id'] = user_id
+      return redirect('/dashboard')
+    else:
+      messages.error(request, 'Username in use!')
+      return redirect('/')
   else:
     return redirect('/')
 
