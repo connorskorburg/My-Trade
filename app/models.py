@@ -89,3 +89,22 @@ def validate_login(post_data):
 
   return errors
 
+# validate contact form
+def validate_contact(post_data):
+  errors = {}
+  
+  EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+
+  if len(post_data['name']) < 3 or post_data['name'] == '':
+    errors['name'] = 'Please enter full name'
+
+  if not EMAIL_REGEX.match(post_data['contact-email']) or post_data['contact-email'] == '':
+    errors['contact-email'] = 'Please enter valid email'
+
+  if post_data['message'] == '':
+    errors['message'] = 'Please enter valid message'
+
+  if profanity.contains_profanity(post_data['message']) == True:
+    errors['bad-message'] = 'Please enter appropriate message'
+
+  return errors

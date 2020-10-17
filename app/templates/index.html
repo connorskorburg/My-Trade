@@ -44,11 +44,14 @@
 
   </nav>
 
+
   {% if messages %}
   <div class="messages messages-error">
     {% for message in messages %}
       {% if message.tags == 'error' %}
         <p class="error">{{ message }}</p>
+      {% elif message.tags == 'success' %}
+        <p class="success">{{ message }}</p>
       {% endif %}
     {% endfor %}
   </div>
@@ -183,16 +186,25 @@
     <section id="contact-inner">
 
       <article class="contact-left">
-        <form action="/contact">
+        <form action="/contact" method="POST">
         {% csrf_token %}
           
           <h3>Contact</h3>
+          {% if messages %}
+          <div class="messages messages-warning">
+            {% for message in messages %}
+              {% if message.tags == 'warning' %}
+                <p class="error">{{ message }}</p>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
 
           <label for="name">Full Name</label>
           <input type="text" name="name">
         
           <label for="email">Email</label>
-          <input type="email" name="email">
+          <input type="email" name="contact-email">
 
           <label for="message">Message</label>
           <textarea name="message"></textarea>
