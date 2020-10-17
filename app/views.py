@@ -5,7 +5,6 @@ import os
 from .models import *
 import bcrypt
 from django.contrib import messages
-import smtplib
 # Create your views here.
 
 
@@ -108,29 +107,16 @@ def contact(request):
       messages.warning(request, val)
     return redirect('/#contact')
   else: 
-    # send message to email
-    with smtplib.SMTP('smtp.gmail.com', 587) as smpt:
-      
-      email_address = 'connorskorburgcontact@gmail.com'
-      name = request.POST['name']
-      user_email = request.POST['contact-email']
-      user_message = request.POST['message']
-
-      smpt.ehlo()
-      smpt.starttls()
-      smpt.ehlo()
-      
-      smpt.login(email_address, os.environ.get('CONTACT_EMAIL_PASS'))
-      
-      subject = f'New Message from {name}, {user_email}'
-      body = user_message
-
-      message = f'Subject: {subject}\n\n{body}'
-
-      smpt.sendmail(email_address, email_address, message)
-    
+      mysql = MySQLConnection('MyTradeDB')
+      query = 'INSERT INTO message (name, email, content, created_at, updated_at) VALUES (%(name)s, %(email)s, %(content)s, NOW(), NOW())'
+      data = {
+        'name': request.POST['name'],
+        'email': request.POST['contact-email'],
+        'content': request.POST['message'],
+      }
+      new_message = mysql.query_db(query, data)
       messages.success(request, 'Email Successfully sent!')
-    return redirect('/')
+      return redirect('/')
 
 
 # render dashboard
